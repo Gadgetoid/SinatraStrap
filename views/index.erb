@@ -1,0 +1,32 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Hello, world!</h1>
+    <p>Welcome to Sinatra Strap, a Bootstrap CSS, Sinatra, ERB, DataMapper and SQLite enhanced Ruby/Sinatra
+      boilerplate for your
+      web projects.
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <h2>Settings</h2>
+      <p>Settings are defined in config.yml, but some defaults have been chosen for you.</p>
+      <pre><%=File.read(CONFIG_FILE)%></pre>
+    </div>
+    <div class="col-lg-4">
+      <h2>Admin User</h2>
+      <p>We've set up an Admin User for you:</p>
+      <ul>
+        <li>Username: <%=CONFIG.admin_email%></li>
+        <li>Password: <%=CONFIG.admin_pass%></li>
+      </ul>
+      <p><a class="btn btn-default" href="#">Log in &raquo;</a></p>
+    </div>
+    <div class="col-lg-4">
+      <h2>Database</h2>
+      <p>The database <%=CONFIG.database%> has been created for you.</p>
+      <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+    </div>
+  </div>
