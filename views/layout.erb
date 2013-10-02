@@ -20,7 +20,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a class="link_secure" href="<%=CONFIG.secure_home%>"><span class="glyphicon glyphicon-cog"></span>
             Admin</a></li>
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
         <% else %>
         <form class="navbar-form navbar-right" method="post" action="/login">
           <div class="form-group">
@@ -29,7 +29,7 @@
           <div class="form-group">
             <input type="password" id="pass" name="pass" placeholder="Password" class="form-control">
           </div>
-          <button type="submit" class="btn btn-success">Sign in</button>
+          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-lock"></span> Sign in</button>
         </form>
         <% end %>
       </div><!--/.navbar-collapse -->
