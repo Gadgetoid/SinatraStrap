@@ -1,1 +1,0 @@
-DataMapper.setup(:default, 'sqlite://' + File.join(ROOT,CONFIG['database']))

@@ -7,8 +7,12 @@ ROOT = File.expand_path File.dirname(__FILE__)
 # Include routes and libs
 Dir.glob(ROOT + '/{routes,data,lib}/*.rb').each { |file| require file }
 
+CONFIG = MyConfig.new
+
+DataMapper.setup(:default, 'sqlite://' + File.join(ROOT,CONFIG.database))
 DataMapper.finalize
 DataMapper.auto_upgrade!
+setup_admin_user
 
 class App < Sinatra::Base
 
