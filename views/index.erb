@@ -12,8 +12,8 @@
   <div class="row">
     <div class="col-lg-4">
       <h2>Settings</h2>
-      <p>Settings are defined in <%=CONFIG_FILE%>, but some defaults have been chosen for you.</p>
-      <pre><%=File.read(CONFIG_FILE)%></pre>
+      <p>Settings are defined in <%=CONFIG.location%>, but some defaults have been chosen for you.</p>
+      <pre><%=CONFIG.raw%></pre>
     </div>
     <div class="col-lg-4">
       <h2>Admin User</h2>

@@ -2,11 +2,21 @@
 
 class MyConfig
 
+  def location
+    return @location
+  end
+
+  def raw
+    return File.read( @location )
+  end
+
   def [](key)
     return @config[key.to_s]
   end
 
   def initialize( config_file = File.join(ROOT,'config.yml') )
+
+    @location = config_file
 
     @defaults = {
         'admin_email' => 'test@example.com',
@@ -21,10 +31,10 @@ class MyConfig
 
     p 'Setting up Config'
 
-    @config = YAML::load_file(config_file)
+    @config = YAML::load_file(@location)
     @config = Hash.new unless @config
     @config = @defaults.merge( @config )
-    File.write(config_file, @config.to_yaml)
+    File.write(@location, @config.to_yaml)
 
     p @config
 
