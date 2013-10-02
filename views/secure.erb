@@ -8,13 +8,13 @@
 
 <div class="container">
   <div class="row">
-    <% if CONFIG.admin_email == @user.email %>
+    <% if CONFIG.admin.email == @user.email %>
     <div class="col-lg-4">
       <h2>Default Admin User</h2>
       <p>You are logged in as the default admin user.</p>
-      <% if @user.password == CONFIG_DEFAULTS['admin_pass'] %>
+      <% if @user.password == CONFIG.defaults['admin']['pass'] %>
       <p class="label label-danger">You should probably change the password from the default.</p>
-      <p>This can be done in <%=CONFIG_FILE%></p>
+      <p>This can be done in <%=CONFIG.location%></p>
       <% end %>
     </div>
     <% end %>

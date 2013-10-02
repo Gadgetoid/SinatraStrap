@@ -7,7 +7,22 @@ ROOT = File.expand_path File.dirname(__FILE__)
 # Include routes and libs
 Dir.glob(ROOT + '/{routes,data,lib}/*.rb').each { |file| require file }
 
-CONFIG = MyConfig.new
+CONFIG_FILE = File.join(ROOT,'config.yml')
+CONFIG_DEFAULTS = {
+    'admin' => {
+        'email' => 'test@example.com',
+        'pass'  => 'test',
+        'first_name'  => 'Testington',
+        'last_name'   => 'Testleroy'
+    },
+
+    'database'    => 'data.db',
+    'secret'      => SecureRandom.uuid,
+    'expiry'      => 2592000,
+    'secure_home' => '/secure'
+}
+
+CONFIG = MyConfig.new( CONFIG_FILE, CONFIG_DEFAULTS )
 
 DataMapper.setup(:default, 'sqlite://' + File.join(ROOT,CONFIG.database))
 DataMapper.finalize
