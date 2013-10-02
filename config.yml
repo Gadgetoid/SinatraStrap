@@ -6,3 +6,4 @@ last_name: Testleroy
 database: data.db
 secret: ba7c262d-415a-4fd1-b952-5fcc92d0d389
 expiry: 2592000
+secure_home: /secure

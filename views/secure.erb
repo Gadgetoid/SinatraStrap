@@ -1,0 +1,26 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Admin</h1>
+    <p>Great! You've successfully logged in.</p>
+    <p>See routes/login.rb to find out how this happened.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% if CONFIG.admin_email == @user.email %>
+    <div class="col-lg-4">
+      <h2>Default Admin User</h2>
+      <p>You are logged in as the default admin user.</p>
+      <% if @user.password == CONFIG_DEFAULTS['admin_pass'] %>
+      <p class="label label-danger">You should probably change the password from the default.</p>
+      <p>This can be done in <%=CONFIG_FILE%></p>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="col-lg-4">
+      <h2>Create A New User</h2>
+      <p>Why not create a new user?</p>
+    </div>
+  </div>
+</div>

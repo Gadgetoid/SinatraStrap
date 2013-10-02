@@ -20,5 +20,22 @@ class App < Sinatra::Base
 
   end
 
+  helpers do
+    def secure_page
+      redirect '/login' unless session[:valid]
+    end
+  end
+
+  before do
+
+    @body_class = request.path_info.split('/').join(' path-').strip unless request.path_info == '/'
+    @body_class = 'home' if request.path_info == '/'
+
+    if session[:valid]
+      @user = User.first( :id => session[:id] )
+    end
+
+  end
+
   set :views, File.join(ROOT,'views')
 end

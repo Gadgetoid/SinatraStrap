@@ -22,7 +22,8 @@ else
       'last_name'   => 'Testleroy',
       'database'    => 'data.db',
       'secret'      => SecureRandom.uuid,
-      'expiry'      => 2592000
+      'expiry'      => 2592000,
+      'secure_home' => '/secure'
   } unless defined? CONFIG_DEFAULTS and CONFIG_DEFAULTS.is_a? Hash
 
   settings = YAML::load_file(CONFIG_FILE)
