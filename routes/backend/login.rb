@@ -21,7 +21,7 @@ class App < Sinatra::Base
       session[:id] = user.id
       redirect CONFIG.secure_home
     else
-      erb :login
+      erb 'backend/login'.to_sym
     end
   end
 end

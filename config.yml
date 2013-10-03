@@ -1,10 +1,14 @@
 --- 
 admin: 
   email: test@example.com
-  pass: test
+  pass: testing1
   first_name: Testington
   last_name: Testleroy
+pass: 
+  length: 8
+  require_digits: true
 database: data.db
 secret: ba7c262d-415a-4fd1-b952-5fcc92d0d389
 expiry: 2592000
 secure_home: /secure
+pass_length: 8

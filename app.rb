@@ -5,24 +5,11 @@ ROOT = File.expand_path File.dirname(__FILE__)
 # Keep data access/processing libs in /libs/<libname>.rb
 
 # Include routes and libs
-Dir.glob(ROOT + '/{routes,data,lib}/*.rb').each { |file| require file }
+Dir.glob(ROOT + '/{routes,data,lib}/{*/*.rb,*.rb}').each { |file| require file }
 
-CONFIG_FILE = File.join(ROOT,'config.yml')
-CONFIG_DEFAULTS = {
-    'admin' => {
-        'email' => 'test@example.com',
-        'pass'  => 'test',
-        'first_name'  => 'Testington',
-        'last_name'   => 'Testleroy'
-    },
+DEFAULT_CONFIG = Hash.new unless defined? DEFAULT_CONFIG
 
-    'database'    => 'data.db',
-    'secret'      => SecureRandom.uuid,
-    'expiry'      => 2592000,
-    'secure_home' => '/secure'
-}
-
-CONFIG = MyConfig.new( CONFIG_FILE, CONFIG_DEFAULTS )
+CONFIG = MyConfig.new( File.join(ROOT,'config.yml'),DEFAULT_CONFIG )
 
 DataMapper.setup(:default, 'sqlite://' + File.join(ROOT,CONFIG.database))
 DataMapper.finalize
@@ -32,6 +19,8 @@ setup_admin_user
 class App < Sinatra::Base
 
   configure do
+
+    set :public_folder, 'public'
 
     enable :sessions
     set :sessions,
