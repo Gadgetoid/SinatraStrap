@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+      <div class="col-lg-4">
+        <h2>Create A New User</h2>
+        <p>Why not create a new user?</p>
+        <form role="form" method="post" action="/secure/users">
+          <%if @new_user && @new_user.has_errors%>
+
+            <div class="bs-callout bs-callout-danger">
+              <h4>Something went wrong!</h4>
+              <%@new_user.get_errors.each do |error|%>
+                <p><%=error%></p>
+              <%end%>
+            </div>
+
+          <%end%>
+
+          <div class="form-group">
+            <input type="text" id="email" name="email" class="form-control" placeholder="Email address" autofocus
+                   value="<%=params[:email]%>">
+          </div>
+          <div class="form-group">
+            <input type="password" id="pass" name="pass" class="form-control" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First name"
+                   value="<%=params[:first_name]%>">
+          </div>
+          <div class="form-group">
+            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last name"
+                   value="<%=params[:last_name]%>">
+          </div>
+          <button class="btn btn-default pull-right" type="submit">Create</button>
+        </form>
+      </div>
+    <div class="col-lg-8">
+      <h2>Current Users</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+          </thead>
+          <tbody>
+            <% User.each do |user| %>
+              <tr>
+                <td><%=user.email %></td>
+                <td><%=user.first_name %></td>
+                <td><%=user.last_name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

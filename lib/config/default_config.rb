@@ -11,6 +11,7 @@ DEFAULT_CONFIG = {
         'require_digits' => true},
 
     'database'    => 'data.db',
+    'database_action' => 'upgrade',
     'secret'      => SecureRandom.uuid,
     'expiry'      => 2592000,
     'secure_home' => '/secure'

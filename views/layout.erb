@@ -19,8 +19,20 @@
         </ul>
         <% if session[:valid] %>
         <ul class="nav navbar-nav navbar-right">
-          <li><a class="link_secure" href="<%=CONFIG.secure_home%>"><span class="glyphicon glyphicon-cog"></span>
-            Admin</a></li>
+          <li class="dropdown">
+            <a class="link_secure" href="<%=CONFIG.secure_home%>" class="dropdown-toggle" data-toggle="dropdown"><span
+            class="glyphicon glyphicon-cog"></span>
+              Admin <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="<%=CONFIG.secure_home%>">Home</a></li>
+              <li><a href="<%=CONFIG.secure_home%>/users">Manage Users</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
           <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
         <% else %>
         <form class="navbar-form navbar-right" method="post" action="/login">
