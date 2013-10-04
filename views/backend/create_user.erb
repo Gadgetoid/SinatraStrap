@@ -8,7 +8,8 @@
 
             <div class="bs-callout bs-callout-danger">
               <h4>Something went wrong!</h4>
-              <%@new_user.get_errors.each do |error|%>
+              <p>Please check the validation errors below and try again.</p>
+              <%@new_user.get_errors(:generic).each do |error|%>
                 <p><%=error%></p>
               <%end%>
             </div>
@@ -18,18 +19,32 @@
           <div class="form-group">
             <input type="text" id="email" name="email" class="form-control" placeholder="Email address" autofocus
                    value="<%=params[:email]%>">
+            <%if @new_user && @new_user.has_errors(:email)%>
+              <div class="bs-callout bs-callout-danger"><%=@new_user.get_errors(:email)%></div>
+            <%end%>
           </div>
           <div class="form-group">
-            <input type="password" id="pass" name="pass" class="form-control" placeholder="Password">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                   value="<%=params[:password]%>">
+            <%if @new_user && @new_user.has_errors(:password)%>
+              <div class="bs-callout bs-callout-danger"><%=@new_user.get_errors(:password)%></div>
+            <%end%>
           </div>
           <div class="form-group">
             <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First name"
                    value="<%=params[:first_name]%>">
+            <%if @new_user && @new_user.has_errors(:first_name)%>
+              <div class="bs-callout bs-callout-danger"><%=@new_user.get_errors(:first_name)%></div>
+            <%end%>
           </div>
           <div class="form-group">
             <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last name"
                    value="<%=params[:last_name]%>">
+            <%if @new_user && @new_user.has_errors(:last_name)%>
+              <div class="bs-callout bs-callout-danger"><%=@new_user.get_errors(:last_name)%></div>
+            <%end%>
           </div>
+
           <button class="btn btn-default pull-right" type="submit">Create</button>
         </form>
       </div>

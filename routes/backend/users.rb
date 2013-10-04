@@ -7,7 +7,10 @@ class App < Sinatra::Base
   post CONFIG.secure_home + '/users' do
     secure_page 'Manage Users'
 
-    @new_user = User.new.from_hash( params )
+    @new_user = User.new.from_hash( params ) do
+      # Additional stuff to do before save is called
+      self.enabled = true
+    end
 
     redirect CONFIG.secure_home + '/users' unless @new_user.has_errors
 

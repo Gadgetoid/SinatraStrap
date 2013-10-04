@@ -57,5 +57,11 @@ class App < Sinatra::Base
 
   end
 
+  not_found do
+    status 404
+    @page_title = '404'
+    erb :notfound# , :layout => :no_nav_layout
+  end
+
   set :views, File.join(ROOT,'views')
 end

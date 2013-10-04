@@ -26,6 +26,8 @@ GEM
       dm-core (~> 1.2.0)
     dm-migrations (1.2.0)
       dm-core (~> 1.2.0)
+    dm-noisy-failures (0.2.3)
+      data_mapper
     dm-serializer (1.2.2)
       dm-core (~> 1.2.0)
       fastercsv (~> 1.5)
@@ -74,6 +76,7 @@ PLATFORMS
 
 DEPENDENCIES
   data_mapper
+  dm-noisy-failures
   dm-sqlite-adapter
   rack
   rack-cache

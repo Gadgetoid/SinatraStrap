@@ -11,57 +11,18 @@ class User
 
   end
 
-  def has_errors
-    return self.errors.length > 0
-  end
-
-  def get_errors
-    errors = self.errors.collect do |error|
-      if error.is_a? Array or error.is_a? Hash
-        error[0]
-      else
-        error
-      end
-    end
-  end
-
-  def from_hash( hash )
-
-    begin
-
-      self.email = hash[:email]
-      self.password = hash[:pass]
-      self.first_name = hash[:first_name]
-      self.last_name = hash[:last_name]
-      self.enabled = true
-
-      if self.valid?
-        self.save!
-        return self
-      else
-        return self
-      end
-
-    rescue ArgumentError => @exception
-
-      self.errors.add nil, @exception.message
-
-    rescue DataObjects::IntegrityError => @exception
-
-      self.errors.add nil, @exception.message
-
-    end
-
-    return self
-
-  end
-
   def password=( password )
 
-    raise ArgumentError, 'Password must be at least ' + CONFIG.pass.length.to_s + ' characters long' if password
-    .length < CONFIG.pass.length
-    raise ArgumentError, 'Password must contain at least one digit ' unless /\d/.match(password) if CONFIG.pass
-    .require_digits
+    #raise ArgumentError, 'Password must be at least ' + CONFIG.pass.length.to_s + ' characters long' if password
+    #.length < CONFIG.pass.length
+    #raise ArgumentError, 'Password must contain at least one digit ' unless /\d/.match(password) if CONFIG.pass
+    #.require_digits
+
+    self.errors.add :password, 'Password must be at least ' + CONFIG.pass.length.to_s + ' characters long' if password.length < CONFIG.pass.length
+    self.errors.add :password, 'Password must contain at least one digit ' unless /\d/.match(password) if CONFIG.pass.require_digits
+
+    raise ArgumentError, 'Password failed validation' if self.errors[:password].length > 0
+
     super
 
   end
