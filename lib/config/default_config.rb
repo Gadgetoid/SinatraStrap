@@ -14,5 +14,6 @@ DEFAULT_CONFIG = {
     'database_action' => 'upgrade',
     'secret'      => SecureRandom.uuid,
     'expiry'      => 2592000,
-    'secure_home' => '/secure'
+    'secure_home' => '/secure',
+    'upload_dir'  => File.join(ROOT,'public/uploads/')
 }

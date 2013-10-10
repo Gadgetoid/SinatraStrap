@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap 101 Template</title>
+  <title><%=meta_title%></title>
+  <meta name="description" content="<%=meta_description%>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+  <% css.each do |stylesheet| %>
+    <link rel="stylesheet" type="text/css" href="<%= stylesheet %>" />
+  <% end %>
 </head>
 <body class="<%=@body_class%>">
   <div class="navbar navbar-inverse navbar-fixed-top">
@@ -51,5 +55,8 @@
   <%= yield %>
   <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.min.js"></script>
   <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <% js.each do |javascript| %>
+  <script type="text/javascript" src="<%= javascript %>"></script>
+  <% end %>
 </body>
 </html>

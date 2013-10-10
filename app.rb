@@ -17,11 +17,13 @@ Dir.glob(ROOT + '/{data,lib,routes}/{*.rb,*/*.rb}').each { |file| require file }
 
 DataMapper.setup(:default, 'sqlite://' + File.join(ROOT,CONFIG.database))
 DataMapper.finalize
-DataMapper.auto_migrate! if CONFIG.database_action = 'migrate'
-DataMapper.auto_upgrade! if CONFIG.database_action = 'upgrade'
+DataMapper.auto_migrate! if CONFIG.database_action == 'migrate'
+DataMapper.auto_upgrade! if CONFIG.database_action == 'upgrade'
 setup_admin_user
 
 class App < Sinatra::Base
+
+  attr_reader :meta_title, :meta_description
 
   configure do
 
@@ -29,21 +31,52 @@ class App < Sinatra::Base
 
     enable :sessions
     set :sessions,
-      :secret => CONFIG['secret']
+    :secret => CONFIG['secret']
 
   end
 
   helpers do
-    def secure_page( permissions = nil )
+    def meta_title( value = nil )
+      @meta_title = value unless value.nil?
+      return @meta_title
+    end
+
+    def meta_description( value = nil )
+      @meta_description = value unless value.nil?
+      return @meta_description
+    end
+
+    def css( *args )
+      @includes = {:css=>[],:js=>[]} if @includes.nil?
+      args.each do |file|
+        @includes[:css].push file
+      end
+      return @includes[:css]
+    end
+
+    def js( *args )
+      @includes = {:css=>[],:js=>[]} if @includes.nil?
+      args.each do |file|
+        @includes[:js].push file
+      end
+      return @includes[:js]
+    end
+
+    def secure_page( *args )
       redirect '/login' unless session[:valid]
-      if permissions.is_a?(String)
-        redirect '/login' unless @user.can? permissions
-      elsif permissions.is_a?(Array)
-        permissions.each do |permission|
+      if args.length == 1 and args[0].is_a?(String)
+        redirect '/login' unless @user.can? args[0]
+      elsif args.length == 1 and args[0].respond_to?(:each)
+        args[0].each do |permission|
+          redirect '/login' unless @user.can? permission
+        end
+      elsif args.length > 0
+        args.each do |permission|
           redirect '/login' unless @user.can? permission
         end
       end
     end
+
   end
 
   before do
