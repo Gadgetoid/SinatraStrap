@@ -1,3 +1,13 @@
+# Expand DataMapper Resource classes with Class methods
+module DataMapper
+  module Model
+    # Allows for Classname.random to get a random record
+    def random
+      return self.first( :offset => rand( self.count ) )
+    end
+  end
+end
+
 module DataMapper
   module Resource
 

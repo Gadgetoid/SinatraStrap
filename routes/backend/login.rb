@@ -7,7 +7,7 @@ class App < Sinatra::Base
 
   get '/login' do
     redirect '/secure' if session[:valid]
-    erb :login
+    erb 'backend/login'.to_sym
   end
 
   post '/login' do
